@@ -1,0 +1,43 @@
+DATA ANALYTICS API
+
+REST API done with node js,mongo & express
+
+Used to fetch data from mongo
+
+Data in mongo are manually generated - more details are documented within corporate folder
+
+endpoint - /kyc,/getTransactions,/getHistory/<LEI>
+
+on running 'node index.js' within project folder
+
+App will be avaialable @
+
+http://localhost:3000/api/kyc
+
+ before this we have
+ - to create its db(flask) and collections(kycs,transactions,exportcontrolcountries) required
+ - change mongo URI(available in .env) as per your own mongo db 
+ 
+ This is hosted in render
+ for that you have to add this in github and later create webservice in render and connect this
+ add build command as 'yarn'
+ and start command as 'node index.js'
+
+ /kyc/wallet
+  passing wallet((to get verified by whom)) 
+  saving logs for each time lei verified for data available in our kyc collection
+
+ /getLogs/:lei fetch logs for particular lei
+ 
+ Modification added 
+	
+	Combined Rules 1(LEI verification) and 2(ECC Verification) for a transaction 
+	Added Endpoints
+ 	/ECCCheck 
+ 		- get import and export country names of a transaction and verify it with data available in mongo(country list)
+ 		-return an array with authorized or unauthorized info
+ 	/saveLEILogs - Save logs if lei verified
+ 	/saveECCLogs - Save logs if ecc veriifed
+ 	/getLEILogs/:orderNo - fetch leilogs array from mongo
+ 	/getECCLogs/:orderNo
+ 	/getCombinedLogs/:orderNo -fetch combined log for lei and ecc recently verified 
